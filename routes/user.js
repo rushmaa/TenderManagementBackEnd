@@ -17,18 +17,22 @@ UserRouter.get('/',(req,res)=>{
     });
 });
 
-UserRouter.post("/login/", (req, res) => {
-    User.findOne({ email: req.body.email }, (err, response) => {
-      if (err)
+UserRouter.post("/login", (req, res) => {
+    User.findOne({ email: req.body.email, password: req.body.pass }, (err, response) => {
+      var email= req.body.email;
+      var password= req.body.pass;
+      //ToDo: Remove when we have user
+      if (email==='test@test.com' && password=== '12345') {
+        console.log('success')
+        res.status(200).json({ success:true, user:response });
+      }else{
+        console.log('failure')
         res.status(500).json({
           message: {
             msgBody: "Unable to get Users",
             msgError: true,
           },
         });
-      else {
-          //ToDo add code to check username and password matches.
-        res.status(200).json({ response });
       }
     });
   });
