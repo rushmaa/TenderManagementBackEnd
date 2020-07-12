@@ -23,8 +23,8 @@ UserRouter.post("/login", (req, res) => {
       var password= req.body.pass;
       //ToDo: Remove when we have user
       if (email==='test@test.com' && password=== '12345') {
-        console.log('success')
-        res.status(200).json({ success:true, user:response });
+        var user = new User({ contactPerson:{firstName:'sample', lastName:'ln', username: 'usn', phneNumber: 1234}  });
+        res.status(200).json({ success:true, user:user });
       }else{
         console.log('failure')
         res.status(500).json({
