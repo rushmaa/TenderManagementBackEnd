@@ -5,8 +5,11 @@ var cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
 const user = require("./routes/user");
+const tender = require("./routes/tender");
 app.use(cors());
 app.use("/user", user);
+app.use("/tender", tender);
+const Tender = require('./model/Tender');
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -15,7 +18,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const uri = "mongodb://204.93.167.131/tender";
+
+const uri = "mongodb+srv://admin:admin@cluster0-lrfm0.mongodb.net/<dbname>?retryWrites=true&w=majority";
 mongoose.connect(
   uri,
   {
@@ -24,9 +28,11 @@ mongoose.connect(
   },
   (err) => {
     if (err) {
-        console.log("unable to connect to database");
+        console.log("unable to connect to database", err);
         process.exit(1);
-    } else console.log("successfully connected to the database");
+    } else {
+      console.log('connected to database');
+    }
   }
 );
 
