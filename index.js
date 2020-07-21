@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 
-const uri = "mongodb+srv://admin:admin@cluster0-lrfm0.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const uri = "mongodb+srv://admin:admin@cluster0-lrfm0.mongodb.net/tender?retryWrites=true&w=majority";
 mongoose.connect(
   uri,
   {

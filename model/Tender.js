@@ -13,4 +13,4 @@ const TenderSchema = new mongoose.Schema({
   responseContent: String
 });
 
-module.exports = mongoose.model("Tender", TenderSchema);
+module.exports = mongoose.model("tenders", TenderSchema);
