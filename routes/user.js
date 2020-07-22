@@ -5,7 +5,7 @@ const User = require('../model/User');
 
 UserRouter.post('/',async (req,res)=>{
   var userInstance={
-    businessName: 'String',
+    businessName: 'tendmgmnt',
     businessLegal: 'String',
     address: 'String',
     city: 'String',
@@ -13,8 +13,9 @@ UserRouter.post('/',async (req,res)=>{
     postcode: 'String',
     country: 'String',
     categories: 'String',
-    email:'email@eail.com',
-    password:'1235'
+    email:'email@email.com',
+    password:'1235',
+    type:''
   }
     let userModel = new User(userInstance);
   await userModel.save();

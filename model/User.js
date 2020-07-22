@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   postcode: String,
   country: String,
   categories: String,
+  type: String,
   email: {
     type: String,
     required: true,
