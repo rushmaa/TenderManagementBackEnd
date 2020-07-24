@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
   country: String,
   categories: String,
   type: String,
+  confirmed: String,
   email: {
     type: String,
     required: true,

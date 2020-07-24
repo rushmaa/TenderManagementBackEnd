@@ -15,7 +15,7 @@ UserRouter.post('/',async (req,res)=>{
     categories: 'String',
     email:'email@email.com',
     password:'1235',
-    type:''
+    type:'admin'
   }
     let userModel = new User(userInstance);
   await userModel.save();
@@ -31,6 +31,16 @@ UserRouter.get('/getallusers',async (req,res)=>{
  })
 });
 
+UserRouter.get('/getunconfirmeduser',async (req,res)=>{
+  console.log('in get unconfirmed user')
+  User.find({confirmed:'0'},(err, response) =>{
+    if (err) {
+      console.log('err=>', err)
+    }
+    res.status(200).json({success:true, users:response})
+  })
+ });
+
 UserRouter.post("/login", (req, res) => {
     User.findOne({ email: req.body.email, password: req.body.pass }, (err, response) => {
       if (err) {
@@ -39,6 +49,20 @@ UserRouter.post("/login", (req, res) => {
         res.status(200).json({ user:response });
       }
     });
+  });
+
+  UserRouter.post("/update", (req, res) => {
+    const filter = { email: req.body.email };
+    const update = { confirmed: '1' };
+
+  // `doc` is the document _before_ `update` was applied
+    User.findOneAndUpdate(filter, update,(err, response)=>{
+      if (err) {
+        res.status(500).json({ err:err });
+      } else {
+        res.status(200).json({ user:response });
+      }
+    })
   });
 
 //create
