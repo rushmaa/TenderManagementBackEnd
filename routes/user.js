@@ -57,6 +57,20 @@ UserRouter.post("/update", (req, res) => {
   });
 });
 
+UserRouter.post("/reject", (req, res) => {
+  const filter = { email: req.body.email };
+  const update = { confirmed: "-1" };
+
+  // `doc` is the document _before_ `update` was applied
+  User.findOneAndUpdate(filter, update, (err, response) => {
+    if (err) {
+      res.status(500).json({ err: err });
+    } else {
+      res.status(200).json({ user: response });
+    }
+  });
+});
+
 //create
 UserRouter.post("/signup", (req, res) => {
   const userObj = new User(req.body);
