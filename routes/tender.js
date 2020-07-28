@@ -24,12 +24,7 @@ TenderRouter.post("/addNewTender", (req, res) => {
   newTender
     .save()
     .then(() => {
-      res.status(200).json({
-        message: {
-          msgBody: "Successfully Added Tender",
-          msgError: false,
-        },
-      });
+      res.status(200).json("Successfully Added Tender");
     })
     .catch((err) => {
       res.status(500).json({
