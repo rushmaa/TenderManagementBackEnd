@@ -19,36 +19,26 @@ TenderRouter.get("/gettenderdetails", (req, res) => {
 });
 
 TenderRouter.post("/addNewTender", (req, res) => {
-  const newTender = new Tender({
-    tenderID: "",
-    tenderTitleLevel1: "",
-    tenderTitleLevel2: "String",
-    enquiries: "String",
-    name: "String",
-    email: "String",
-    descriptionTitle: "String",
-    descriptionContent: "String",
-    responseContent: "String",
-  });
+  const newTender = new Tender(req.body);
 
   newTender
     .save()
-    .then(() =>
+    .then(() => {
       res.status(200).json({
         message: {
           msgBody: "Successfully Added Tender",
           msgError: false,
         },
-      })
-    )
-    .catch((err) =>
+      });
+    })
+    .catch((err) => {
       res.status(500).json({
         message: {
           msgBody: "Unable to add Tender",
           msgError: true,
         },
-      })
-    );
+      });
+    });
 });
 
 module.exports = TenderRouter;
