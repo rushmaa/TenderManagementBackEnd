@@ -27,12 +27,7 @@ TenderRouter.post("/addNewTender", (req, res) => {
       res.status(200).json("Successfully Added Tender");
     })
     .catch((err) => {
-      res.status(500).json({
-        message: {
-          msgBody: "Unable to add Tender",
-          msgError: true,
-        },
-      });
+      res.status(500).json("Unable to add Tender");
     });
 });
 
