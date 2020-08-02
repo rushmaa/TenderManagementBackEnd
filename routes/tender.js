@@ -2,6 +2,8 @@ const express = require("express");
 const TenderRouter = express.Router();
 const Tender = require("../model/Tender");
 
+let fs = require('fs-extra');
+
 TenderRouter.get("/getalltenders", (req, res) => {
   Tender.find({})
     .then((response) => {
@@ -31,4 +33,32 @@ TenderRouter.post("/addNewTender", (req, res) => {
     });
 });
 
+// TenderRouter.post('/upload', function(req, res) {
+  
+//   upload(req, res, function (err) {
+//     if (err instanceof multer.MulterError) {
+//         return res.status(500).json(err)
+//     } else if (err) {
+//         return res.status(500).json(err)
+//     }
+//     console.log(req.file)
+// return res.status(200).send(req.file)
+
+// })
+// });
+
+
+
+TenderRouter.get("/getfile", (req, res) => {
+  res.download(`testfile.pdf`)
+  // var fs = require('fs');
+  // fs.readFile(`testfile.pdf`,  (err, data)=>{
+  //   if (err) {
+  //     res.status(404).json("File no found");
+  //   } else {
+  //     res.download(`testfile.pdf`)
+  //   }
+  //});
+  
+});
 module.exports = TenderRouter;

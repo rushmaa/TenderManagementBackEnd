@@ -9,6 +9,8 @@ const tender = require("./routes/tender");
 app.use(cors());
 app.use("/user", user);
 app.use("/tender", tender);
+var multer = require('multer')
+
 const Tender = require('./model/Tender');
 
 if (process.env.NODE_ENV === "production") {
@@ -35,6 +37,31 @@ mongoose.connect(
     }
   }
 );
+var path='./public/uploads/'
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path)
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.body.filename);
+    console.log(file);
+  }
+})
+
+app.use( multer({ storage: storage }).single('file'));
+app.post('/upload',(request, response,next)=>{
+const file = request.file
+if (!file) {
+  const error = new Error('Please upload a file')
+  error.httpStatusCode = 400
+  return next(error)
+}
+else{
+console.log('Server Upload ......');
+      console.log(response.file);
+      response.json({'msg':'File Uploaded ....'});
+    }
+})
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
