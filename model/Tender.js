@@ -22,11 +22,9 @@ const TenderSchema = new mongoose.Schema({
   descriptionListItem2:String,
   responsesItem1:String,
   specificationItem1: String,
-  openingdateFrom: String,
-  closingdateFrom: String,
-  closingdateTo: String,
-  grouping: String,
   tenderName: String,
+  categories: String,
+  fileList: String,
 });
 
 module.exports = mongoose.model("tenders", TenderSchema);

@@ -22,7 +22,7 @@ TenderRouter.get("/gettenderdetails", (req, res) => {
 
 TenderRouter.post("/addNewTender", (req, res) => {
   const newTender = new Tender(req.body);
-
+console.log('tender received---', newTender)
   newTender
     .save()
     .then(() => {
