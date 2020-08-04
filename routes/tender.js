@@ -20,6 +20,12 @@ TenderRouter.get("/gettenderdetails", (req, res) => {
   });
 });
 
+TenderRouter.get("/gettenderidcategories", (req, res) => {
+  Tender.findById({ tenderID: req.body.tenderID }).then((err, response) => {
+    res.status(200).json({ response });
+  });
+});
+
 TenderRouter.post("/addNewTender", (req, res) => {
   const newTender = new Tender(req.body);
 console.log('tender received---', newTender)
@@ -51,14 +57,5 @@ console.log('tender received---', newTender)
 
 TenderRouter.get("/getfile", (req, res) => {
   res.download(`testfile.pdf`)
-  // var fs = require('fs');
-  // fs.readFile(`testfile.pdf`,  (err, data)=>{
-  //   if (err) {
-  //     res.status(404).json("File no found");
-  //   } else {
-  //     res.download(`testfile.pdf`)
-  //   }
-  //});
-  
 });
 module.exports = TenderRouter;
