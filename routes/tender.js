@@ -28,7 +28,6 @@ TenderRouter.get("/gettenderidcategories", (req, res) => {
 
 TenderRouter.post("/addNewTender", (req, res) => {
   const newTender = new Tender(req.body);
-console.log('tender received---', newTender)
   newTender
     .save()
     .then(() => {
@@ -39,23 +38,23 @@ console.log('tender received---', newTender)
     });
 });
 
-// TenderRouter.post('/upload', function(req, res) {
+TenderRouter.post('/upload', function(req, res) {
   
-//   upload(req, res, function (err) {
-//     if (err instanceof multer.MulterError) {
-//         return res.status(500).json(err)
-//     } else if (err) {
-//         return res.status(500).json(err)
-//     }
-//     console.log(req.file)
-// return res.status(200).send(req.file)
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+        return res.status(500).json(err)
+    } else if (err) {
+        return res.status(500).json(err)
+    }
+    console.log(req.file)
+return res.status(200).send(req.file)
 
-// })
-// });
+})
+});
 
 
 
 TenderRouter.get("/getfile", (req, res) => {
-  res.download(`testfile.pdf`)
+  res.download(`./public/uploads/${req.query.name}`)
 });
 module.exports = TenderRouter;
