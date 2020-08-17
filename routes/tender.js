@@ -4,8 +4,9 @@ const Tender = require("../model/Tender");
 
 let fs = require('fs-extra');
 
+
 TenderRouter.get("/getalltenders", (req, res) => {
-  Tender.find({})
+  Tender.find({"tenderState":"Open"})
     .then((response) => {
       res.status(200).json({ tenders: response });
     })
